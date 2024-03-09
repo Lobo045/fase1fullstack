@@ -15,6 +15,17 @@ const ListDB = () => {
       });
   }, []); // Empty array as second argument to run effect only once after initial render
 
+  const deleteProject = async (projectId) => {
+    try {
+      await axios.delete(`/api/projects/${projectId}`);
+      // Filter out the deleted project from the state
+      setProjects(projects.filter(project => project.id !== projectId));
+    } catch (error) {
+      console.error('Error deleting project:', error);
+    }
+  };
+
+
   return (
     <div>
       <h1>Projects</h1>
