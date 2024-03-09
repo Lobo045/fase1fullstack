@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import deletedb from './deletedb';
+import DeleteDb from './deletedb';
 
 const ListDB = () => {
   const [projects, setProjects] = useState([]);
@@ -18,7 +18,7 @@ const ListDB = () => {
 
   const deleteProject = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/projects:${id}`);
+      await axios.delete(`http://localhost:3001/projects:${parseInt(id)}`);
       // Filter out the deleted project from the state
       setProjects(projects.filter(project => project.id !== id));
     } catch (error) {
@@ -38,7 +38,7 @@ const ListDB = () => {
             <p>Person in Charge: {project.person_chrage}</p>
             <p>Client Name: {project.client_name}</p>
             <p>Status: {project.done ? 'Done' : 'Not Done'}</p>
-            <p>Delete: onDelete={deleteProject}</p>
+            <button onClick={() => deleteProject(project.id)}>Delete</button>
           </li>
         ))}
       </ul>

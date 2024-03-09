@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const deletedb = ({ project, onDelete }) => {
+const DeleteDb = ({ project, onDelete }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleDelete = () => {
@@ -18,11 +18,11 @@ const deletedb = ({ project, onDelete }) => {
 
   return (
     <li>
-      {project.name}
+      {project.project_name}
       <button onClick={handleDelete}>Delete</button>
       {showConfirmation && (
         <div>
-          <p>Are you sure you want to delete {project.name}?</p>
+          <p>Are you sure you want to delete {project.project_name}?</p>
           <button onClick={confirmDelete}>Yes</button>
           <button onClick={cancelDelete}>No</button>
         </div>
@@ -31,4 +31,4 @@ const deletedb = ({ project, onDelete }) => {
   );
 };
 
-export default deletedb;
+export default DeleteDb;
