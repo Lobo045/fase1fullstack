@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import deletedb from './deletedb';
 
 const ListDB = () => {
   const [projects, setProjects] = useState([]);
@@ -15,11 +16,11 @@ const ListDB = () => {
       });
   }, []); // Empty array as second argument to run effect only once after initial render
 
-  const deleteProject = async (projectId) => {
+  const deleteProject = async (id) => {
     try {
-      await axios.delete(`/api/projects/${projectId}`);
+      await axios.delete(`http://localhost:3001/projects:${id}`);
       // Filter out the deleted project from the state
-      setProjects(projects.filter(project => project.id !== projectId));
+      setProjects(projects.filter(project => project.id !== id));
     } catch (error) {
       console.error('Error deleting project:', error);
     }
@@ -37,6 +38,7 @@ const ListDB = () => {
             <p>Person in Charge: {project.person_chrage}</p>
             <p>Client Name: {project.client_name}</p>
             <p>Status: {project.done ? 'Done' : 'Not Done'}</p>
+            <p>Delete: onDelete={deleteProject}</p>
           </li>
         ))}
       </ul>
